@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- TailwindCSS -->
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+	<!-- Funcionalidade do site -->
+	<script src="scripts/index.js" defer></script>
+
+	<title>Restaurante | Home</title>
+</head>
+
+<body class="flex flex-col min-h-svh">
+	<header class="p-4 bg-yellow-400">
+		<h1 class="text-center text-2xl">Restaurante</h1>
+	</header>
+
+	<main class="flex grow">
+		<menu class="flex w-full p-4 gap-4">
+			<button id="button-client" class="flex-1 p-4 text-2xl rounded-md bg-green-400
+				transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-green-500 cursor-pointer">Efetuar Pedidos</button>
+			<button id="button-admin" class="flex-1 p-4 text-2xl rounded-md bg-blue-400
+			transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-blue-500 cursor-pointer">Gerenciar Produtos</button>
+		</menu>
+	</main>
+</body>
+
+</html>
