@@ -57,7 +57,6 @@ function createRowFromProduct(product) {
 	const newRow = document.createElement("tr");
 
 	newRow.dataset.id = product.getId();
-	newRow.classList.add("hover:bg-gray-200", "cursor-pointer");
 	newRow.innerHTML = `
 		<td class="p-2 border">${product.getId()}</th>
 		<td class="p-2 border">${product.getName()}</th>
@@ -66,23 +65,6 @@ function createRowFromProduct(product) {
 		<td class="p-2 border">${product.getCategory()}</th>
 		<td class="p-2 border"><img src="${product.getImage()}" class="max-w-30"></th>
 	`;
-	newRow.addEventListener("click", () => {
-		const editForm = document.getElementById("form-edit");
-
-		const id = document.getElementById("input-edit-id");
-		const name = document.getElementById("input-edit-name");
-		const description = document.getElementById("input-edit-description");
-		const price = document.getElementById("input-edit-price");
-		const category = document.getElementById("select-edit-category");
-		const image = document.getElementById("input-edit-image");
-
-		id.value = newRow.dataset.id;
-		name.value = product.getName();
-		description.value = product.getDescription();
-		price.value = product.getPrice();
-		category.value = product.getCategory();
-		image.value = product.getImage();
-	});
 
 	return (newRow);
 }

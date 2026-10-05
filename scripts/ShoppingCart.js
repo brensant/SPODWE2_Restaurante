@@ -1,25 +1,18 @@
-import { Item } from "./Item";
+import { Item } from "./Item.js";
+import { Product } from "./Product.js";
 
 /**
- * `ShoppingCart` é um singleton que agrega objetos do tipo `Item`.
+ * `ShoppingCart` agrega objetos do tipo `Item`.
  * */
 export class ShoppingCart {
-	static #instance = null;
-
-	#items = new Array();
+	#items;
 
 	constructor() {
-		if (ShoppingCart.#instance)
-			return (ShoppingCart.#instance);
-
-		ShoppingCart.#instance = this;
+		this.#items = this.#load();
 	}
 
-	static getInstance() {
-		if (!ShoppingCart.#instance)
-			ShoppingCart.#instance = new ShoppingCart();
-
-		return (ShoppingCart.#instance);
+	getItems() {
+		return ([...this.#items]);
 	}
 
 	addItem(item) {
@@ -30,7 +23,9 @@ export class ShoppingCart {
 		if (index == -1)
 			this.#items.push(item);
 		else
-			this.#items[index].setAmount(item.getAmount());
+			this.#items[index].increase(item.getAmount());
+
+		this.#save();
 	}
 
 	removeItem(item) {
@@ -40,19 +35,50 @@ export class ShoppingCart {
 
 		if (index > -1)
 			this.#items.splice(index, 1);
+
+		this.#save();
 	}
 
 	clear() {
 		this.#items = [];
+
+		this.#save();
 	}
 
-	getTotal() {
-		let total = 0;
+	getSubtotal() {
+		let subtotal = 0;
 
 		this.#items.forEach(item => {
-			total += item.getTotal();
+			subtotal += item.getTotal();
 		});
 
-		return (total);
+		return (subtotal);
+	}
+
+	#load() {
+		const data = localStorage.getItem("shoppingCart");
+
+		if (!data) {
+			localStorage.setItem("shoppingCart", JSON.stringify([]));
+			return ([]);
+		}
+
+		return (
+			JSON.parse(data).map(item => new Item(
+				new Product(
+					item.product.id,
+					item.product.name,
+					item.product.description,
+					item.product.price,
+					item.product.category,
+					item.product.image
+				),
+				item.amount
+			))
+		);
+	}
+
+	#save() {
+		localStorage.setItem("shoppingCart", JSON.stringify(this.#items));
 	}
 }

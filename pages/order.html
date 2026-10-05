@@ -9,21 +9,175 @@
 	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 	<!-- Funcionalidade do site -->
-	<script src="../scripts/pages/order.js" defer></script>
+	<script src="../scripts/pages/order.js" type="module"></script>
 
-	<title>Restaurante | Efetuar Pedidos</title>
+	<title>Restaurante — Fazer pedido</title>
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-svh">
 	<header class="p-4 bg-yellow-400">
+		<a href="menu-client.html" class="absolute ">Voltar</a>
 		<h1 class="text-center text-2xl">Cliente</h1>
 	</header>
 
-	<main class="grow">
-		<h2>Porções</h2>
-		<h2>Hambúrgueres</h2>
-		<h2>Bebidas</h2>
-		<h2>Sobremesas</h2>
+	<main class="grow p-4">
+		<h2 class="text-xl">Monte seu pedido</h2>
+		<p class="text-gray-500">Escolha os produtos do nosso cardápio e monte seu pedido.</p>
+
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
+			<section id="menu">
+				<div id="category-filter" class="my-4 flex flex-wrap gap-2" aria-label="Filtrar produtos por categoria">
+					<button type="button" data-category="all"
+						class="category-button rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-700">
+						Todos
+					</button>
+				</div>
+
+				<div id="product-list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+					<!-- Os produtos serão inseridos pelo JavaScript.
+
+						Exemplo de card:
+
+						<article>
+							<img>
+							<h2>...</h2>
+							<p>...</p>
+							<span>...</span>
+							<button>Adicionar</button>
+						</article>
+					-->
+				</div>
+			</section>
+
+			<!-- ================================================= -->
+			<!-- CARRINHO                                          -->
+			<!-- ================================================= -->
+
+			<aside id="cart" class="h-fit lg:sticky lg:top-6">
+				<div class="overflow-hidden rounded-2xl border bg-white shadow-sm">
+					<div class="border-b px-5 py-4">
+						<div class="flex items-center justify-between">
+							<h2 class="text-lg font-semibold">
+								Seu pedido
+							</h2>
+							<button id="clear-cart" type="button"
+								class="text-sm font-medium text-red-600 hover:text-red-800">
+								Limpar
+							</button>
+						</div>
+					</div>
+
+					<!-- Itens -->
+					<div id="cart-items" class="divide-y">
+						<div id="empty-cart" class="px-5 py-10 text-center text-sm text-gray-500">
+							<p class="font-medium text-gray-700">
+								Seu carrinho está vazio.
+							</p>
+							<p class="mt-1">
+								Adicione produtos do cardápio para começar.
+							</p>
+						</div>
+					</div>
+
+					<!-- Resumo -->
+					<div class="border-t px-5 py-5">
+						<div class="space-y-3 text-sm">
+							<div class="flex justify-between">
+								<span class="text-gray-600">
+									Subtotal
+								</span>
+								<span id="cart-subtotal" class="font-medium">
+									R$ 0,00
+								</span>
+							</div>
+							<div class="flex justify-between">
+								<span class="text-gray-600">
+									Taxa de entrega
+								</span>
+								<span id="delivery-fee" class="font-medium">
+									R$ 0,00
+								</span>
+							</div>
+							<div class="border-t pt-3">
+								<div class="flex justify-between text-base">
+									<span class="font-semibold">
+										Total
+									</span>
+									<span id="cart-total" class="font-bold">
+										R$ 0,00
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Tipo de entrega -->
+						<fieldset class="mt-6">
+							<legend class="mb-3 text-sm font-semibold">
+								Tipo de pedido
+							</legend>
+							<div class="space-y-2">
+								<label
+									class="flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition hover:bg-gray-50">
+									<input type="radio" name="delivery-type" value="pickup" class="h-4 w-4" checked>
+									<span>
+										<span class="block text-sm font-medium">
+											Retirada
+										</span>
+										<span class="block text-xs text-gray-500">
+											Retirar no restaurante
+										</span>
+									</span>
+								</label>
+								<label
+									class="flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition hover:bg-gray-50">
+									<input type="radio" name="delivery-type" value="delivery" class="h-4 w-4">
+									<span>
+										<span class="block text-sm font-medium">
+											Delivery
+										</span>
+										<span class="block text-xs text-gray-500">
+											Taxa de R$ 2,50
+										</span>
+									</span>
+								</label>
+							</div>
+						</fieldset>
+
+						<!-- Dados do cliente -->
+						<fieldset class="mt-6 space-y-4">
+							<legend class="mb-3 text-sm font-semibold">
+								Dados do cliente
+							</legend>
+							<div>
+								<label for="customer-name" class="mb-1 block text-sm font-medium">
+									Nome
+								</label>
+								<input id="customer-name" name="customer-name" type="text" autocomplete="name" required
+									class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-200"
+									placeholder="Seu nome">
+							</div>
+							<div>
+								<label for="customer-phone" class="mb-1 block text-sm font-medium">
+									Telefone
+								</label>
+								<input id="customer-phone" name="customer-phone" type="tel" autocomplete="tel"
+									class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-200"
+									placeholder="(00) 00000-0000">
+							</div>
+						</fieldset>
+
+						<button id="finish-order" type="button" disabled
+							class="mt-6 w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-40">
+							Finalizar pedido
+						</button>
+
+						<div id="order-success"
+							class="mt-4 hidden rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
 	</main>
 </body>
 

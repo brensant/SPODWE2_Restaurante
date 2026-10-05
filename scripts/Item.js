@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product } from "./Product.js";
 
 /**
  * `Item` somente associa um `Produto` a uma quantidade.
@@ -35,5 +35,12 @@ export class Item {
 
 	decrease(amount = 1) {
 		this.#amount -= amount;
+	}
+
+	toJSON() {
+		return ({
+			product: this.#product.toJSON(),
+			amount: this.#amount
+		});
 	}
 }

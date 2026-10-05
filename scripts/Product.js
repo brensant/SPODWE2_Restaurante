@@ -20,17 +20,29 @@ export class Product {
 		this.#image = image;
 	}
 
-	getId() { return this.#id }
+	getId() {
+		return (this.#id);
+	}
 
-	getName() { return this.#name }
+	getName() {
+		return (this.#name);
+	}
 
-	getDescription() { return this.#description }
+	getDescription() {
+		return (this.#description);
+	}
 
-	getPrice() { return this.#price }
+	getPrice() {
+		return (this.#price);
+	}
 
-	getCategory() { return this.#category }
+	getCategory() {
+		return (this.#category);
+	}
 
-	getImage() { return this.#image }
+	getImage() {
+		return (this.#image);
+	}
 
 	setName(name) {
 		this.#name = name ?? this.#name;

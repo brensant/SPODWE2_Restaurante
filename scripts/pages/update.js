@@ -89,8 +89,16 @@ function createRowFromProduct(product) {
 		<td class="p-2 border">${product.getCategory()}</th>
 		<td class="p-2 border"><img src="${product.getImage()}" class="max-w-30"></th>
 	`;
-	newRow.addEventListener("click", () => {
-		const editForm = document.getElementById("form-edit");
+	newRow.addEventListener("click", (event) => {
+		let prevSelectedRow = document.querySelector("tr.active");
+
+		console.log(prevSelectedRow);
+
+		if (prevSelectedRow != null) {
+			prevSelectedRow.classList.remove("bg-blue-100", "active");
+		}
+
+		newRow.classList.add("active", "bg-blue-100");
 
 		const id = document.getElementById("input-edit-id");
 		const name = document.getElementById("input-edit-name");
