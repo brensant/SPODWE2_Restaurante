@@ -8,7 +8,7 @@ export const menu = [
 		"Hambúrguer artesanal com queijo",
 		25.90,
 		"Hambúrgueres",
-		"https://picsum.photos/400/300",
+		"https://picsum.photos/seed/1/400/300",
 	),
 	new Product(
 		2,
@@ -16,7 +16,7 @@ export const menu = [
 		"Hambúrguer artesanal com queijo e salada",
 		28.90,
 		"Hambúrgueres",
-		"https://picsum.photos/400/300",
+		"https://picsum.photos/seed/2/400/300",
 	),
 	new Product(
 		3,
@@ -24,7 +24,7 @@ export const menu = [
 		"Porção de batata frita",
 		15.00,
 		"Porções",
-		"https://picsum.photos/400/300",
+		"https://picsum.photos/seed/3/400/300",
 	),
 	new Product(
 		4,
@@ -32,7 +32,7 @@ export const menu = [
 		"Refrigerante de latinha 350ml",
 		10.00,
 		"Bebidas",
-		"https://picsum.photos/400/300",
+		"https://picsum.photos/seed/4/400/300",
 	),
 	new Product(
 		5,
@@ -40,6 +40,6 @@ export const menu = [
 		"Milkshake com pedaços de fruta",
 		12.00,
 		"Sobremesas",
-		"https://picsum.photos/400/300",
+		"https://picsum.photos/seed/5/400/300",
 	)
 ];

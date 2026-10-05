@@ -20,113 +20,124 @@
 		<h1 class="text-center text-2xl">Gestão</h1>
 	</header>
 
-	<main class="grow p-4">
-		<h2 class="text-xl">Cadastrar Produto</h2>
-		<p class="text-gray-500">Preencha o formulário com as informações do novo produto.</p>
+	<main class="grow p-4 lg:landscape:grid lg:landscape:grid-cols-2 lg:landscape:items-start lg:landscape:gap-6">
 
-		<form id="form-create" class="my-4 max-w-200">
-			<div class="md:flex md:items-center mb-4">
-				<div class="md:w-1/3">
-					<label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="input-create-name">
-						Nome
-					</label>
-				</div>
-				<div class="md:w-2/3">
-					<input
-						class="appearance-none border-2 border-gray-200 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-						id="input-create-name" type="text" required>
-				</div>
+		<section class="min-w-0">
+			<div class="mb-4">
+				<h2 class="text-xl font-semibold">Cadastrar Produto</h2>
+				<p class="text-gray-500">Preencha o formulário com as informações do novo produto.</p>
 			</div>
-			<div class="md:flex md:items-center mb-4">
-				<div class="md:w-1/3">
-					<label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="input-create-description">
-						Descrição
-					</label>
+
+			<form id="form-create" class="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+
+				<div class="mb-4 md:flex md:items-center">
+					<div class="md:w-1/3">
+						<label class="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+							for="input-create-name">
+							Nome
+						</label>
+					</div>
+					<div class="md:w-2/3">
+						<input
+							class="w-full appearance-none rounded border-2 border-gray-200 p-2 text-gray-700 leading-tight focus:border-purple-500 focus:bg-white focus:outline-none"
+							id="input-create-name" type="text" required>
+					</div>
 				</div>
-				<div class="md:w-2/3">
-					<input
-						class="appearance-none border-2 border-gray-200 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-						id="input-create-description" type="text" required>
+				<div class="mb-4 md:flex md:items-center">
+					<div class="md:w-1/3">
+						<label class="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+							for="input-create-description">
+							Descrição
+						</label>
+					</div>
+					<div class="md:w-2/3">
+						<input
+							class="w-full appearance-none rounded border-2 border-gray-200 p-2 text-gray-700 leading-tight focus:border-purple-500 focus:bg-white focus:outline-none"
+							id="input-create-description" type="text" required>
+					</div>
 				</div>
-			</div>
-			<div class="md:flex md:items-center mb-4">
-				<div class="md:w-1/3">
-					<label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 no-spinner" for="input-create-price">
-						Preço
-					</label>
+				<div class="mb-4 md:flex md:items-center">
+					<div class="md:w-1/3">
+						<label class="no-spinner mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+							for="input-create-price">
+							Preço
+						</label>
+					</div>
+					<div class="md:w-2/3">
+						<input
+							class="w-full appearance-none rounded border-2 border-gray-200 p-2 text-gray-700 leading-tight focus:border-purple-500 focus:bg-white focus:outline-none"
+							id="input-create-price" type="number" required min="0" step="0.01">
+					</div>
 				</div>
-				<div class="md:w-2/3">
-					<input
-						class="appearance-none border-2 border-gray-200 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-						id="input-create-price" type="number" required min="0" step="0.01">
+				<div class="mb-4 md:flex md:items-center">
+					<div class="md:w-1/3">
+						<label class="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+							for="select-create-category">
+							Categoria
+						</label>
+					</div>
+					<div class="md:w-2/3">
+						<select
+							class="w-full appearance-none rounded border-2 border-gray-200 p-2 text-gray-700 leading-tight focus:border-purple-500 focus:bg-white focus:outline-none"
+							id="select-create-category" required>
+							<option selected disabled value="">-- Selecione --</option>
+							<option value="Porções">Porções</option>
+							<option value="Hambúrgueres">Hambúrgueres</option>
+							<option value="Bebidas">Bebidas</option>
+							<option value="Sobremesas">Sobremesas</option>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="md:flex md:items-center mb-4">
-				<div class="md:w-1/3">
-					<label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="select-create-category">
-						Categoria
-					</label>
+				<div class="mb-4 md:flex md:items-center">
+					<div class="md:w-1/3">
+						<label class="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+							for="input-create-image">
+							Imagem
+						</label>
+					</div>
+					<div class="md:w-2/3">
+						<input
+							class="w-full appearance-none rounded border-2 border-gray-200 p-2 text-gray-700 leading-tight focus:border-purple-500 focus:bg-white focus:outline-none"
+							id="input-create-image" type="text" placeholder="https://picsum.photos/400/300"
+							value="https://picsum.photos/400/300">
+					</div>
 				</div>
-				<div class="md:w-2/3">
-					<select
-						class="appearance-none border-2 border-gray-200 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-						id="select-create-category" required>
-						<option selected disabled value="">-- Selecione --</option>
-						<option value="Porções">Porções</option>
-						<option value="Hambúrgueres">Hambúrgueres</option>
-						<option value="Bebidas">Bebidas</option>
-						<option value="Sobremesas">Sobremesas</option>
-					</select>
-				</div>
-			</div>
-			<div class="md:flex md:items-center mb-4">
-				<div class="md:w-1/3">
-					<label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="input-create-image">
-						Imagem
-					</label>
-				</div>
-				<div class="md:w-2/3">
-					<input
-						class="appearance-none border-2 border-gray-200 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-						id="input-create-image"
-						type="text"
-						placeholder="https://picsum.photos/400/300"
-						value="https://picsum.photos/400/300">
-				</div>
-			</div>
-			<div class="md:flex md:items-center">
-				<div class="md:w-1/3"></div>
-				<div class="md:w-2/3">
+				<div class="flex justify-end">
 					<button
-						class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold p-2 rounded cursor-pointer"
-						type="submit"
-						id="button-create-save">
+						class="cursor-pointer rounded bg-purple-500 p-2 font-bold text-white shadow transition hover:bg-purple-400 focus:outline-none"
+						type="submit" id="button-create-save">
 						Salvar
 					</button>
 				</div>
-			</div>
-		</form>
+			</form>
+		</section>
 
-		<h2 class="text-xl">Produtos Cadastrados</h2>
-		<div class="overflow-x-auto">
-			<table class="table-auto my-4 border border-collapse border-black">
-				<thead>
-					<tr>
-						<th class="p-2 border">ID</th>
-						<th class="p-2 border">Nome</th>
-						<th class="p-2 border">Descrição</th>
-						<th class="p-2 border">Preço</th>
-						<th class="p-2 border">Categoria</th>
-						<th class="p-2 border">Imagem</th>
-					</tr>
-				</thead>
-				<tbody id="table-body">
-					<tr>
-						<!-- Lista de produtos cadastrados -->
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<section class="min-w-0">
+			<div class="mb-4">
+				<h2 class="text-xl font-semibold">Produtos Cadastrados</h2>
+				<p class="text-gray-500">Selecione um produto na tabela para visualizá-lo.</p>
+			</div>
+
+			<div class="max-h-96 overflow-x-auto ovefflow-y-auto border border-gray-300 shadow-sm">
+				<table class="min-w-max table-auto border-collapse">
+					<thead class="sticky top-0 bg-gray-100">
+						<tr>
+							<th class="border p-2">ID</th>
+							<th class="border p-2">Nome</th>
+							<th class="border p-2">Descrição</th>
+							<th class="border p-2">Preço</th>
+							<th class="border p-2">Categoria</th>
+							<th class="border p-2">Imagem</th>
+						</tr>
+					</thead>
+					<tbody id="table-body">
+						<tr>
+							<!-- Lista de produtos cadastrados -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
 	</main>
 </body>
 

@@ -23,6 +23,10 @@ function populateProductsTable() {
 
 function setupNewProductForm() {
 	const formCreate = document.querySelector("#form-create");
+	const inputImage = document.getElementById("input-create-image");
+
+	inputImage.placeholder = `https://picsum.photos/seed/${pr.getAll().length + 1}/400/300`;
+	inputImage.value = `https://picsum.photos/seed/${pr.getAll().length + 1}/400/300`;
 
 	formCreate.addEventListener("submit", (event) => {
 		event.preventDefault()
@@ -49,6 +53,9 @@ function setupNewProductForm() {
 			const tableBody = document.getElementById("table-body");
 			tableBody.appendChild(createRowFromProduct(newProduct));
 			alert("Produto cadastrado!");
+
+			inputImage.placeholder = `https://picsum.photos/seed/${pr.getAll().length + 1}/400/300`;
+			inputImage.value = `https://picsum.photos/seed/${pr.getAll().length + 1}/400/300`;
 		}
 	});
 }
