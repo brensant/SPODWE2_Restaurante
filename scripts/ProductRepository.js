@@ -15,7 +15,7 @@ export class ProductRepository {
 
 	create(name, description, price, category, image) {
 		if (this.getByName(name) != null) {
-			alert(`Produto com o nome "${name}" já existe`);
+			alert(`Erro: produto com o nome "${name}" já existe.`);
 			return (null);
 		}
 
@@ -53,7 +53,8 @@ export class ProductRepository {
 		product.setCategory(data.category);
 		product.setImage(data.image);
 
-		return (true);
+		this.#save();
+		return (product);
 	}
 
 	delete(id) {
@@ -66,6 +67,7 @@ export class ProductRepository {
 
 		this.#products.splice(index, 1);
 
+		this.#save();
 		return (true);
 	}
 

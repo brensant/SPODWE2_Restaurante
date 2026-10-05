@@ -1,6 +1,5 @@
 import { Product } from "../Product.js";
 import { ProductRepository } from "../ProductRepository.js";
-import { menu } from "../menu.js";
 
 const pr = new ProductRepository();
 
@@ -8,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	populateProductsTable();
 
 	setupNewProductForm();
+	setupEditProductForm();
 });
 
 /**
@@ -26,29 +26,48 @@ function populateProductsTable() {
 function createRowFromProduct(product) {
 	const newRow = document.createElement("tr");
 
+	newRow.dataset.id = product.getId();
+	newRow.classList.add("hover:bg-gray-200", "cursor-pointer");
 	newRow.innerHTML = `
 		<td class="p-2 border">${product.getId()}</th>
 		<td class="p-2 border">${product.getName()}</th>
 		<td class="p-2 border">${product.getDescription()}</th>
 		<td class="p-2 border">${Number.parseFloat(product.getPrice()).toFixed(2)}</th>
 		<td class="p-2 border">${product.getCategory()}</th>
-		<td class="p-2 border"><img src="${product.getImage()}"></th>
+		<td class="p-2 border"><img src="${product.getImage()}" class="max-w-30"></th>
 	`;
+	newRow.addEventListener("click", () => {
+		const editForm = document.getElementById("form-edit");
+
+		const id = document.getElementById("input-edit-id");
+		const name = document.getElementById("input-edit-name");
+		const description = document.getElementById("input-edit-description");
+		const price = document.getElementById("input-edit-price");
+		const category = document.getElementById("select-edit-category");
+		const image = document.getElementById("input-edit-image");
+
+		id.value = newRow.dataset.id;
+		name.value = product.getName();
+		description.value = product.getDescription();
+		price.value = product.getPrice();
+		category.value = product.getCategory();
+		image.value = product.getImage();
+	});
 
 	return (newRow);
 }
 
 function setupNewProductForm() {
-	const form = document.querySelector("form");
+	const formCreate = document.querySelector("#form-create");
 
-	form.addEventListener("submit", (event) => {
+	formCreate.addEventListener("submit", (event) => {
 		event.preventDefault()
 
-		const name = document.getElementById("input-name").value;
-		const description = document.getElementById("input-description").value;
-		const price = Number.parseFloat(document.getElementById("input-price").value);
-		const category = document.getElementById("select-category").value;
-		const image = document.getElementById("input-image").value;
+		const name = document.getElementById("input-create-name").value;
+		const description = document.getElementById("input-create-description").value;
+		const price = Number.parseFloat(document.getElementById("input-create-price").value);
+		const category = document.getElementById("select-create-category").value;
+		const image = document.getElementById("input-create-image").value;
 
 		if (name == "" || description == "" || price === "" || category == "" || image == "") {
 			alert("Por favor, preencha todos os campos.");
@@ -65,6 +84,76 @@ function setupNewProductForm() {
 		if (newProduct != null) {
 			const tableBody = document.getElementById("table-body");
 			tableBody.appendChild(createRowFromProduct(newProduct));
+			alert("Produto cadastrado!");
 		}
 	});
+}
+
+function setupEditProductForm() {
+	const formEdit = document.getElementById("form-edit");
+
+	formEdit.addEventListener("submit", (event) => {
+		event.preventDefault();
+
+		const inputId = document.getElementById("input-edit-id");
+		const inputName = document.getElementById("input-edit-name");
+		const inputDescription = document.getElementById("input-edit-description");
+		const inputPrice = document.getElementById("input-edit-price");
+		const inputCategory = document.getElementById("select-edit-category");
+		const inputImage = document.getElementById("input-edit-image");
+
+		const id = Number.parseInt(inputId.value);
+
+		const product = pr.update(id, {
+			name: inputName.value,
+			description: inputDescription.value,
+			price: Number.parseFloat(inputPrice.value),
+			category: inputCategory.value,
+			image: inputImage.value
+		});
+
+		if (product != null) {
+			const oldRow = document.querySelector(`tr[data-id='${inputId.value}']`);
+			const updatedRow = createRowFromProduct(product);
+
+			oldRow.replaceWith(updatedRow);
+		}
+	});
+
+	const deleteButton = document.getElementById("button-edit-delete");
+
+	deleteButton.addEventListener("click", () => {
+		const inputId = document.getElementById("input-edit-id");
+		const inputName = document.getElementById("input-edit-name");
+		const inputDescription = document.getElementById("input-edit-description");
+		const inputPrice = document.getElementById("input-edit-price");
+		const inputCategory = document.getElementById("select-edit-category");
+		const inputImage = document.getElementById("input-edit-image");
+
+		const id = Number.parseInt(inputId.value);
+
+		if (pr.delete(id)) {
+			const oldRow = document.querySelector(`tr[data-id='${id}']`);
+			console.log(oldRow);
+			oldRow.remove();
+
+			cleanEditForm();
+		}
+	});
+}
+
+function cleanEditForm(rowId) {
+	const inputId = document.getElementById("input-edit-id");
+	const inputName = document.getElementById("input-edit-name");
+	const inputDescription = document.getElementById("input-edit-description");
+	const inputPrice = document.getElementById("input-edit-price");
+	const inputCategory = document.getElementById("select-edit-category");
+	const inputImage = document.getElementById("input-edit-image");
+
+	inputId.value = "";
+	inputName.value = "";
+	inputDescription.value = "";
+	inputPrice.value = "";
+	inputCategory.value = "";
+	inputImage.value = "";
 }
