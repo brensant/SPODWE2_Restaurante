@@ -63,11 +63,11 @@ function setupNewProductForm() {
 	formCreate.addEventListener("submit", (event) => {
 		event.preventDefault()
 
-		const name = document.getElementById("input-create-name").value;
-		const description = document.getElementById("input-create-description").value;
-		const price = Number.parseFloat(document.getElementById("input-create-price").value);
-		const category = document.getElementById("select-create-category").value;
-		const image = document.getElementById("input-create-image").value;
+		const name = document.getElementById("input-create-name").value.trim();
+		const description = document.getElementById("input-create-description").value.trim();
+		const price = Number.parseFloat(document.getElementById("input-create-price").value.trim());
+		const category = document.getElementById("select-create-category").value.trim();
+		const image = document.getElementById("input-create-image").value.trim();
 
 		if (name == "" || description == "" || price === "" || category == "" || image == "") {
 			alert("Por favor, preencha todos os campos.");
@@ -105,18 +105,19 @@ function setupEditProductForm() {
 		const id = Number.parseInt(inputId.value);
 
 		const product = pr.update(id, {
-			name: inputName.value,
-			description: inputDescription.value,
-			price: Number.parseFloat(inputPrice.value),
-			category: inputCategory.value,
-			image: inputImage.value
+			name: inputName.value.trim(),
+			description: inputDescription.value.trim(),
+			price: Number.parseFloat(inputPrice.value.trim()),
+			category: inputCategory.value.trim(),
+			image: inputImage.value.trim()
 		});
 
-		if (product != null) {
-			const oldRow = document.querySelector(`tr[data-id='${inputId.value}']`);
+		if (product != false) {
+			const oldRow = document.querySelector(`tr[data-id='${id}']`);
 			const updatedRow = createRowFromProduct(product);
 
 			oldRow.replaceWith(updatedRow);
+			alert(`Produto ID ${id} atualizado`);
 		}
 	});
 
@@ -138,6 +139,7 @@ function setupEditProductForm() {
 			oldRow.remove();
 
 			cleanEditForm();
+			alert(`Produto ID ${id} removido`);
 		}
 	});
 }

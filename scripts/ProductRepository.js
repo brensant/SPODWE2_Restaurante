@@ -47,6 +47,12 @@ export class ProductRepository {
 		if (!product)
 			return (false);
 
+		const copy = this.getByName(data.name);
+		if (copy != null && copy.getId() != id) {
+			alert(`Erro: produto com o nome "${data.name}" já existe.`);
+			return (false);
+		}
+
 		product.setName(data.name);
 		product.setDescription(data.description);
 		product.setPrice(data.price);
