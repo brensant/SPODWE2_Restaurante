@@ -83,12 +83,15 @@ function createProductCard(product) {
 function renderCategories() {
 	const container = document.getElementById("category-filter");
 
+	const categoryAllButton = container.querySelector("button")
+
+	categoryAllButton.addEventListener("click", () => {
+		setActiveCategory(categoryAllButton);
+		renderProducts("all");
+	});
+
 	const categories = [
-		...new Set(
-			productRepository
-				.getAll()
-				.map(product => product.getCategory())
-		)
+		...new Set(productRepository.getAll().map(product => product.getCategory()))
 	];
 
 	categories.forEach(category => {
@@ -123,19 +126,17 @@ function renderCategories() {
 }
 
 function setActiveCategory(activeButton) {
-	document
-		.querySelectorAll(".category-button")
-		.forEach(button => {
-			button.classList.remove(
-				"bg-gray-900",
-				"text-white"
-			);
+	document.querySelectorAll(".category-button").forEach(button => {
+		button.classList.remove(
+			"bg-gray-900",
+			"text-white"
+		);
 
-			button.classList.add(
-				"border-gray-300",
-				"text-gray-700"
-			);
-		});
+		button.classList.add(
+			"border-gray-300",
+			"text-gray-700"
+		);
+	});
 
 	activeButton.classList.remove(
 		"border-gray-300",
@@ -277,13 +278,11 @@ function updateDeliveryFee() {
  */
 
 function setupDeliveryType() {
-	document
-		.querySelectorAll('input[name="delivery-type"]')
-		.forEach(input => {
-			input.addEventListener("change", () => {
-				updateDeliveryFee();
-			});
+	document.querySelectorAll('input[name="delivery-type"]').forEach(input => {
+		input.addEventListener("change", () => {
+			updateDeliveryFee();
 		});
+	});
 }
 
 /*
@@ -366,7 +365,7 @@ function showOrderSuccess(order) {
 
 	element.classList.remove("hidden");
 
-	element.textContent = `Pedido #${order.getId()} realizado com sucesso. ` + `Total: ${formatCurrency(order.getTotal())}`;
+	element.textContent = `Pedido #${order.getId()} efetuado. ` + `Total: ${formatCurrency(order.getTotal())}`;
 }
 
 function getDeliveryFee(deliveryType) {
